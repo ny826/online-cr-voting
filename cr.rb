@@ -12,6 +12,7 @@ class User
  	property :name,String
  	property :password,String
  	property :branch,String
+ 	property :count,Integer 
  end
  class Rajiv
     include DataMapper::Resource
@@ -43,6 +44,8 @@ post '/signin' do
     if user
     	puts "in signin if statement"
     	session[:user_id]=user.id
+    	user.count+=1;
+    	user.save
     	redirect '/page/branch'
     else
     redirect '/register'
@@ -69,11 +72,12 @@ post '/register' do
     puts "branch is #{params[:branch]}"
 
     user=User.new
-    
+
     user.enrollment=enrollment
     user.name=name
     user.password=password
     user.branch=branch
+    user.count=0;
     user.save
     session[:user_id]=user.id
 

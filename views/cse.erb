@@ -1,5 +1,7 @@
 <h1>Hello <%= User.get(session[:user_id]).name%></h1>
 <a href="/logout">logout</a>
+
+<a href=""></a>
 <ol>
     <% user=User.get(session[:user_id])%>
     <%rajiv=Rajiv.all(:voter=>user.enrollment).first%>
@@ -12,10 +14,11 @@
     	<li><h1>Rajiv</h1></li><a href="/rajiv">vote</a>
 	   <li><h1>Hanu</h1></li><a href="/hanu">vote</a>
 	   <%else%>
-	       <% if Rajiv.all(:voter=>user.enrollment)%>
-<h2><%= "you have already voted for rajiv " %></h2><br><br>
+	       <% if Rajiv.all(:voter=>user.enrollment).first%>
+
+           <h2><%= "you have already voted for rajiv " %></h2>
 	       <%else%>
-	      <h2> <%= "you have voted for hanu " %></h2>
+	       <h2><%= "you have voted for hanu " %></h2>
 	       <%end%>
     <%end%>
 	
@@ -32,11 +35,16 @@
 
 
 
-<h1>Total rajiv voters</h1>
+
 <% cr_id=70116403215%>
+<%if User.get(session[:user_id]).count>0%>
+<h1>Total rajiv voters</h1>
 <%= Rajiv.all(:cr=>cr_id).count%>
+<%end%>
 
 
-<h1>Total Hanu voters</h1>
 <% cr_id=01016403215%>
+<%if User.get(session[:user_id]).count>0 %>
+<h1>Total Hanu voters</h1>
 <%= Hanu.all(:cr=>cr_id).count%>
+<%end%>
