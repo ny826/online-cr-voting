@@ -6,7 +6,7 @@
     <% puts "rajiv is : #{rajiv}"%>
     <%hanu=Hanu.all(:voter=>user.enrollment).first%>
     <%puts "hanu is :#{hanu}"%>
-    <%if hanu && rajiv%>
+    <%if hanu==nil && rajiv==nil%>
     <h1>Cr Candidates</h1>
 
     	<li><h1>Rajiv</h1></li><a href="/rajiv">vote</a>
@@ -15,7 +15,7 @@
 	       <% if Rajiv.all(:voter=>user.enrollment)%>
 <h2><%= "you have already voted for rajiv " %></h2><br><br>
 	       <%else%>
-	       <%= "you have voted for hanu " %>
+	      <h2> <%= "you have voted for hanu " %></h2>
 	       <%end%>
     <%end%>
 	
