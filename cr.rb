@@ -4,7 +4,7 @@ require 'data_mapper'
 set :sessions,true
 
 DataMapper.setup(:default, "sqlite:///#{Dir.pwd}/pankaj.db")
- 
+
 class User
  	include DataMapper::Resource
  	property :id,Serial
@@ -12,26 +12,26 @@ class User
  	property :name,String
  	property :password,String
  	property :branch,String
- 	property :count,Integer 
+ 	property :count,Integer
  end
- class Rajiv
+  class Rajiv
     include DataMapper::Resource
  	property :id,Serial
  	property :voter,Integer
- 	property :cr,Integer	
+ 	property :cr,Integer
  end
 
  class Hanu
     include DataMapper::Resource
  	property :id,Serial
  	property :voter,Integer
- 	property :cr,Integer	
+ 	property :cr,Integer
  end
  DataMapper.finalize
 DataMapper.auto_upgrade!
 
 
-get '/' do 
+get '/' do
 	erb :login
 end
 
@@ -91,7 +91,7 @@ puts "Hello Cse"
 erb :cse
 end
 
-get '/rajiv' do 
+get '/rajiv' do
 puts "in get rajiv "
 rajiv=Rajiv.new
 user=User.get(session[:user_id])
@@ -101,7 +101,7 @@ rajiv.save
 redirect '/logout'
 end
 
-get '/hanu' do 
+get '/hanu' do
 puts "in get hanu "
 hanu=Hanu.new
 user=User.get(session[:user_id])
