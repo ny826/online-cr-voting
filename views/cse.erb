@@ -1,0 +1,42 @@
+<h1>Hello <%= User.get(session[:user_id]).name%></h1>
+<a href="/logout">logout</a>
+<ol>
+    <% user=User.get(session[:user_id])%>
+    <%rajiv=Rajiv.all(:voter=>user.enrollment).first%>
+    <% puts "rajiv is : #{rajiv}"%>
+    <%hanu=Hanu.all(:voter=>user.enrollment).first%>
+    <%puts "hanu is :#{hanu}"%>
+    <%if hanu && rajiv%>
+    <h1>Cr Candidates</h1>
+
+    	<li><h1>Rajiv</h1></li><a href="/rajiv">vote</a>
+	   <li><h1>Hanu</h1></li><a href="/hanu">vote</a>
+	   <%else%>
+	       <% if Rajiv.all(:voter=>user.enrollment)%>
+<h2><%= "you have already voted for rajiv " %></h2><br><br>
+	       <%else%>
+	       <%= "you have voted for hanu " %>
+	       <%end%>
+    <%end%>
+	
+</ol>
+
+
+<h1>User List</h1>
+<ol>
+<% user=User.all%>
+<% user.each do |user|%>
+<li><%= user.name%></li>
+<%end%>
+</ol>
+
+
+
+<h1>Total rajiv voters</h1>
+<% cr_id=70116403215%>
+<%= Rajiv.all(:cr=>cr_id).count%>
+
+
+<h1>Total Hanu voters</h1>
+<% cr_id=01016403215%>
+<%= Hanu.all(:cr=>cr_id).count%>
